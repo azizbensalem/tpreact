@@ -78,7 +78,6 @@ function TaskPage() {
     const fetchData = async () => {
       setLoading(false);
       const result = await api.fetchTasksByFilter(searchValue);
-      console.log("result: ", didCancel);
       if (!didCancel) {
         setTasks(result);
         setLoading(false);
@@ -88,7 +87,6 @@ function TaskPage() {
     fetchData();
 
     return () => {
-      console.log("cleanup: ", searchValue);
       didCancel = true;
     };
   }, [searchValue]);
@@ -119,7 +117,6 @@ function TaskPage() {
           />
         </>
       )}
-      {console.log(isVisible)}
     </div>
   );
 }

@@ -6,7 +6,6 @@ function TaskForm(props) {
   // const addTask = "Add a task";
   const steps = ["Enter a title", "Click on the button"];
   const [title, setTitle] = useState("");
-  console.log("title: " + title);
 
   const handleChange = (e) => {
     setTitle(e.target.value);

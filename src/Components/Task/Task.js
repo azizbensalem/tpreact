@@ -11,7 +11,6 @@ export default function Task({ id, title, duration, deleteTask, updateTask }) {
   const [updateMode, setUpdateMode] = useState(false);
   const [titleToUpdate, setTitleToUpdate] = useState(title);
   const [durationToUpdate, setDurationToUpdate] = useState(duration);
-  console.log("durationToUpdate: ", durationToUpdate);
 
   const { push } = useHistory();
   let { path } = useRouteMatch();

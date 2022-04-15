@@ -10,6 +10,8 @@ import {
 
 import Layout from "./Components/Layout/Layout";
 import TaskDetails from "./Components/TaskDetails/TaskDetails";
+import TeacherRoutes from "./Components/TeacherRoutes/TeacherRoutes";
+import StudentRoutes from "./Components/StudentRoutes/StudentRoutes";
 
 function App() {
   return (
@@ -17,7 +19,13 @@ function App() {
       <Router>
         <Layout>
           <Switch>
-            <Route path="/hello">
+            <Route path="/teacher">
+              <TeacherRoutes />
+            </Route>
+            <Route path="/student">
+              <StudentRoutes />
+            </Route>
+            {/* <Route path="/hello">
               <TaskPage />
             </Route>
             <Route path="/hello/world">
@@ -31,7 +39,7 @@ function App() {
             </Route>
             <Route exact path="/task-page">
               <TaskPage />
-            </Route>
+            </Route> */}
           </Switch>
         </Layout>
       </Router>
