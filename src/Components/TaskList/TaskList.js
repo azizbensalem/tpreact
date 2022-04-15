@@ -6,14 +6,14 @@ function TasksList(props) {
       {props.myTasks.map(function (x) {
         return (
           <Task
-            key={x._id}
-            id={x._id}
+            key={x.id}
+            id={x.id}
             title={x.title}
             duration={x.duration}
             // details={x.details}
-            type={x.type}
-            startDate={x.startDate}
-            removeTask={props.removeTask}
+            // type={x.type}
+            // startDate={x.startDate}
+            deleteTask={props.deleteTask}
             updateTask={props.updateTask}
           />
         );

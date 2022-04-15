@@ -1,33 +1,70 @@
-import "./Task.css";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import {
+  useHistory,
+  Link /*, Redirect*/,
+  useRouteMatch,
+} from "react-router-dom";
 
-function Task(props) {
-  function renderActions() {
-    return (
-      <div className="actions">
-        <span>delete</span>
-        <span>update</span>
-      </div>
-    );
-  }
-  const { title, duration, type, startDate } = props;
+import "./Task.css";
+export default function Task({ id, title, duration, deleteTask, updateTask }) {
+  const [updateMode, setUpdateMode] = useState(false);
+  const [titleToUpdate, setTitleToUpdate] = useState(title);
+  const [durationToUpdate, setDurationToUpdate] = useState(duration);
+  console.log("durationToUpdate: ", durationToUpdate);
+
+  const { push } = useHistory();
+  let { path } = useRouteMatch();
+
+  const handleUpdateTask = () => {
+    updateTask(id, titleToUpdate, durationToUpdate);
+    setUpdateMode(false);
+  };
   return (
-    <div className="App">
-      <div className="task">
-        <div className={`title ${type === "IT" ? "last" : ""}`}>{title}</div>
-        <div>{duration} ms</div>
+    <div className="task">
+      {!updateMode ? (
+        <>
+          <div>
+            <Link to={`${path}/${id}`}>
+              <div className="title">
+                {title} ({duration})
+              </div>
+            </Link>
+          </div>
+          <div className="actions">
+            <div>
+              <button onClick={() => deleteTask(id)}>delete</button>
+              <button onClick={() => setUpdateMode(true)}>update</button>
+            </div>
+          </div>
+        </>
+      ) : (
         <div>
-          {type} ({startDate})
+          <input
+            type="text"
+            name="title"
+            value={titleToUpdate}
+            onChange={(e) => setTitleToUpdate(e.target.value)}
+          />
+          <input
+            type="text"
+            value={durationToUpdate}
+            name="duration"
+            onChange={(e) => setDurationToUpdate(e.target.value)}
+          />
+          <button className="button" onClick={handleUpdateTask}>
+            Update a task
+          </button>
         </div>
-        {/* {props.details && (
-          <>
-            <div className="title">{details.type}</div>
-            <div className="title">{details.startDate}</div>
-          </>
-        )} */}
-        {renderActions()}
-      </div>
+      )}
     </div>
   );
 }
+Task.propTypes = {
+  title: PropTypes.string.isRequired,
+  duration: PropTypes.number,
+};
 
-export default Task;
+Task.defaultProps = {
+  duration: 30,
+};

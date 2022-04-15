@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 
 import Layout from "./Components/Layout/Layout";
+import TaskDetails from "./Components/TaskDetails/TaskDetails";
 
 function App() {
   return (
@@ -22,10 +23,12 @@ function App() {
             <Route path="/hello/world">
               <Hello />
             </Route>
+            <Route exact path="/task-page/:id">
+              <TaskDetails />
+            </Route>
             <Route exact path="/">
               <Redirect to="/task-page" />
             </Route>
-
             <Route exact path="/task-page">
               <TaskPage />
             </Route>

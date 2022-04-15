@@ -19,15 +19,17 @@ function TaskPage() {
   const addTask = (title) => {
     setTasks([...tasks, { id: tasks.length + 1, title: title }]);
   };
-  const removeTask = (id) => {
-    setTasks(tasks.filter((item) => item.id !== id));
-  };
-  const updateTask = (id, title) => {
-    const newTasks = tasks.map((task) =>
-      task.id === id ? { id, title: title } : task
-    );
-    setTasks(newTasks);
-  };
+
+  // const removeTask = (id) => {
+  //   setTasks(tasks.filter((item) => item.id !== id));
+  // };
+  // const updateTask = (id, title) => {
+  //   const newTasks = tasks.map((task) =>
+  //     task.id === id ? { id, title: title } : task
+  //   );
+  //   setTasks(newTasks);
+  // };
+
   const [isVisible, setIsVisible] = useState(true);
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
@@ -74,17 +76,12 @@ function TaskPage() {
   useEffect(() => {
     let didCancel = false;
     const fetchData = async () => {
-      setLoading(true);
-      if (!searchValue) {
-        setTasks([]);
+      setLoading(false);
+      const result = await api.fetchTasksByFilter(searchValue);
+      console.log("result: ", didCancel);
+      if (!didCancel) {
+        setTasks(result);
         setLoading(false);
-      } else {
-        const result = await api.fetchTasksByFilter(searchValue);
-        console.log("result: ", didCancel);
-        if (!didCancel) {
-          setTasks(result);
-          setLoading(false);
-        }
       }
     };
     // console.log("useEffect:", searchValue)
@@ -117,8 +114,8 @@ function TaskPage() {
         <>
           <TasksList
             myTasks={tasks}
-            removeTask={removeTask}
-            updateTask={updateTask}
+            removeTask={api.deleteTask}
+            updateTask={api.updateTask}
           />
         </>
       )}
