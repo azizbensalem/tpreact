@@ -1,19 +1,12 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import {
-  useHistory,
-  Link /*, Redirect*/,
-  useRouteMatch,
-} from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import "./Task.css";
+
 export default function Task({ id, title, duration, deleteTask, updateTask }) {
   const [updateMode, setUpdateMode] = useState(false);
   const [titleToUpdate, setTitleToUpdate] = useState(title);
   const [durationToUpdate, setDurationToUpdate] = useState(duration);
-
-  const { push } = useHistory();
-  let { path } = useRouteMatch();
 
   const handleUpdateTask = () => {
     updateTask(id, titleToUpdate, durationToUpdate);
@@ -24,7 +17,7 @@ export default function Task({ id, title, duration, deleteTask, updateTask }) {
       {!updateMode ? (
         <>
           <div>
-            <Link to={`${path}/${id}`}>
+            <Link to={`tasks/${id}`}>
               <div className="title">
                 {title} ({duration})
               </div>
@@ -32,8 +25,8 @@ export default function Task({ id, title, duration, deleteTask, updateTask }) {
           </div>
           <div className="actions">
             <div>
-              <button onClick={() => deleteTask(id)}>delete</button>
-              <button onClick={() => setUpdateMode(true)}>update</button>
+              <button onClick={() => deleteTask(id)}>Delete</button>
+              <button onClick={() => setUpdateMode(true)}>Update</button>
             </div>
           </div>
         </>
@@ -59,6 +52,7 @@ export default function Task({ id, title, duration, deleteTask, updateTask }) {
     </div>
   );
 }
+
 Task.propTypes = {
   title: PropTypes.string.isRequired,
   duration: PropTypes.number,

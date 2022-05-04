@@ -2,17 +2,20 @@ import "./TaskForm.css";
 import { useState } from "react";
 
 function TaskForm(props) {
-  // props.say();
-  // const addTask = "Add a task";
   const steps = ["Enter a title", "Click on the button"];
   const [title, setTitle] = useState("");
+  const [duration, setDuration] = useState(0);
 
-  const handleChange = (e) => {
+  const titleChange = (e) => {
     setTitle(e.target.value);
   };
 
+  const durationChange = (e) => {
+    setDuration(e.target.value);
+  };
+
   const handleAddTask = () => {
-    props.addTask(title);
+    props.addTask(title, duration);
   };
 
   return (
@@ -27,7 +30,14 @@ function TaskForm(props) {
           type="text"
           name="title"
           value={title}
-          onChange={handleChange}
+          onChange={titleChange}
+          id=""
+        />
+        <input
+          type="text"
+          name="duration"
+          value={duration}
+          onChange={durationChange}
           id=""
         />
         <button onClick={handleAddTask}>Add a task</button>

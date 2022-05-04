@@ -1,6 +1,3 @@
-import TaskPage from "./Pages/TaskPage/TaskPage";
-import Hello from "./Pages/Hello/Hello";
-
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,7 +6,6 @@ import {
 } from "react-router-dom";
 
 import Layout from "./Components/Layout/Layout";
-import TaskDetails from "./Components/TaskDetails/TaskDetails";
 import TeacherRoutes from "./Components/TeacherRoutes/TeacherRoutes";
 import StudentRoutes from "./Components/StudentRoutes/StudentRoutes";
 
@@ -33,13 +29,13 @@ function App() {
             </Route>
             <Route exact path="/task-page/:id">
               <TaskDetails />
-            </Route>
-            <Route exact path="/">
-              <Redirect to="/task-page" />
-            </Route>
-            <Route exact path="/task-page">
+            </Route>*/}
+            {/* <Route exact path="/task-page">
               <TaskPage />
             </Route> */}
+            <Route exact path="/">
+              <Redirect to="/teacher/task-page" />
+            </Route>
           </Switch>
         </Layout>
       </Router>

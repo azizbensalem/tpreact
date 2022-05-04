@@ -24,6 +24,7 @@ export const fetchTasks = async () => {
   await delay(1000);
   return tasks;
 };
+
 export const fetchTasksByFilter = async (searchValue) => {
   await delay(1000);
   return tasks.filter((task) => task.title.includes(searchValue));
@@ -35,14 +36,13 @@ export const fetchTaskById = async (id) => {
   return task;
 };
 
-export const addTask = async (task) => {
+export const addTask = async (title, duration) => {
   await delay(1000);
   const newTask = {
     id: tasks.length + 1,
-    title: task.title,
-    duration: task.duration,
+    title: title,
+    duration: duration,
   };
-
   tasks = tasks.concat(newTask);
   return newTask;
 };
@@ -52,9 +52,9 @@ export const deleteTask = async (id) => {
   tasks = tasks.filter((task) => task.id !== id);
 };
 
-export const updateTask = async (id, title, duration) => {
+export const updateTask = async (id, title) => {
   await delay(1000);
-  const updatedTask = { id, title, duration };
+  const updatedTask = { id, title };
   tasks = tasks.map((task) => (task.id === id ? updatedTask : task));
   return updatedTask;
 };

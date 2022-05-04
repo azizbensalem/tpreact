@@ -10,27 +10,11 @@ function TasksList(props) {
             id={x.id}
             title={x.title}
             duration={x.duration}
-            // details={x.details}
-            // type={x.type}
-            // startDate={x.startDate}
             deleteTask={props.deleteTask}
             updateTask={props.updateTask}
           />
         );
       })}
-
-      {/*  <Task title="learn Html" 
-         duration={60} 
-         details={
-           {
-             type:"IT",
-             startDate:"2021-02-16"
-            }}
-             
-             />
-   
-   <Task title="learn React"/>
-   <Task title="learn Angular"/> */}
     </div>
   );
 }

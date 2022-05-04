@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { fetchTaskById } from "../../services/tasks.service";
-import { useParams, useLocation, useRouteMatch } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import "./TaskDetails.css";
 
 function TaskDetails() {
   const [loading, setLoading] = useState(false);
   const [task, setTask] = useState([]);
 
   const { id } = useParams();
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      console.log(id);
       const result = await fetchTaskById(id);
       setTask(result);
       setLoading(false);
@@ -30,15 +31,6 @@ function TaskDetails() {
 
           <div className="title">Duration</div>
           <div className="value">{task.duration}</div>
-
-          <div className="title">Type</div>
-          <div className="value">{task.type}</div>
-
-          <div className="title">Date</div>
-          <div className="value">{task.date}</div>
-
-          <div className="title">Description</div>
-          <div className="value">{task.description}</div>
         </>
       )}
     </div>
